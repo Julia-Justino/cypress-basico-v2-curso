@@ -53,6 +53,21 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   });
   it('Valida exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
     cy.contains('button', 'Enviar').click();
-    cy.get('.error').should('have.class', 'error')
+    cy.get('.error').should('have.class', 'error');
+  });
+
+  it('Valida opção youtube', () => {
+    cy.fillMandatoryFieldsAndSubmit();
+    cy.get('#product').select('YouTube').should('have.value', 'youtube');
+  });
+
+  it('Valida opção Mentoria', () => {
+    cy.fillMandatoryFieldsAndSubmit();
+    cy.get('#product').select('mentoria').should('have.value', 'mentoria');
+  });
+
+  it('Valida seleciona um produto (Blog)', () => {
+    cy.fillMandatoryFieldsAndSubmit();
+    cy.get('#product').select(1).should('have.value', 'blog');
   });
 })
