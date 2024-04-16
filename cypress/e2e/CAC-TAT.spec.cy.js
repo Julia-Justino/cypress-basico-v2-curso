@@ -31,6 +31,15 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.contains('button', 'Enviar').click();
     cy.get('.error').should('be.visible').contains('Valide os campos obrigatórios!');
   });
+  it('Verifica telefone não permite String', () => {
+    cy.get('#firstName').type("TESTE");
+    cy.get('#lastName').type("TEstesss");
+    cy.get('#email').type("emailteste@=gmail.com");
+    cy.get('#phone').type("abc");
+    cy.get('#open-text-area').type('TESTETESTETEST', { delay: 0 });
+    cy.contains('button', 'Enviar').click();
+    cy.get('.error').should('be.visible').contains('Valide os campos obrigatórios!');
+  });
   it('envia o formuário com sucesso usando um comando customizado', () => {
     cy.fillMandatoryFieldsAndSubmit();
     cy.get('.success').should('be.visible').contains('Mensagem enviada com sucesso.');
