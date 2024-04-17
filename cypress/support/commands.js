@@ -31,3 +31,10 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', function(){
     cy.get('#open-text-area').type('TESTETESTETEST');
     cy.contains('button', 'Enviar').click();
 });
+Cypress.Commands.add('checkGeral',  function(){  
+    cy.get('input[type="radio"]').should('have.length', 3)
+    .each(function($radio){
+      cy.wrap($radio).check();
+      cy.wrap($radio).should('be.checked');
+    })
+});
